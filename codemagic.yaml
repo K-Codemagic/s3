@@ -69,7 +69,7 @@ workflows:
           ls -a
           cd ..
     artifacts:
-      - build/**/outputs/apk/**/*.apk
-      - build/**/outputs/bundle/**/*.aab
+      - build-results/*.aab
+      - build-results/*.apk
       - build/**/outputs/**/mapping.txt
       - flutter_drive.log
