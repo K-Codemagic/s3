@@ -29,38 +29,38 @@ workflows:
       - name: Build finished successfully      
         script: |
           #!/usr/bin/env bash
-        input="pubspec.yaml"
-        mkdir -p build-results
-        mkdir -p build-results/bundle
-        SUB="name: "
-        SUB2="version: "
-        while IFS= read -r line
-        do
-          if [[ "$line" == "$SUB"* ]]; then
-            _name="${line:6}"
-            _name=$(echo "$_name" | tr -d '\r')
-          fi
-          if [[ "$line" == "$SUB2"* ]]; then
-            version="${line:9}"
-            version=$(echo "$version" | tr -d '\r')
-            version="${version%%+*}"
-          fi
-        done < "$input"
-        export name="${_name}-${version}"
-        apk="$name".apk
-        aab="$name".aab
-        app="$name".app
-        echo "$apk"
-        echo "$aab"
-        echo "$app"
-        echo t > build-results/"$apk"
-        echo t > build-results/"$aab"
-        # echo t > "$app"
-        mv "$(pwd)"/build/app/outputs/bundle/debug/app-debug.aab build-results/bundle/"$aab"
-        mv "$(pwd)"/build/app/outputs/flutter-apk/app-debug.apk build-results/"$apk"
-        cd build-results || exit 0
-        ls -a
-        cd ..
+          input="pubspec.yaml"
+          mkdir -p build-results
+          mkdir -p build-results/bundle
+          SUB="name: "
+          SUB2="version: "
+          while IFS= read -r line
+          do
+            if [[ "$line" == "$SUB"* ]]; then
+              _name="${line:6}"
+              _name=$(echo "$_name" | tr -d '\r')
+            fi
+            if [[ "$line" == "$SUB2"* ]]; then
+              version="${line:9}"
+              version=$(echo "$version" | tr -d '\r')
+              version="${version%%+*}"
+            fi
+          done < "$input"
+          export name="${_name}-${version}"
+          apk="$name".apk
+          aab="$name".aab
+          app="$name".app
+          echo "$apk"
+          echo "$aab"
+          echo "$app"
+          echo t > build-results/"$apk"
+          echo t > build-results/"$aab"
+          # echo t > "$app"
+          mv "$(pwd)"/build/app/outputs/bundle/debug/app-debug.aab build-results/bundle/"$aab"
+          mv "$(pwd)"/build/app/outputs/flutter-apk/app-debug.apk build-results/"$apk"
+          cd build-results || exit 0
+          ls -a
+          cd ..
     artifacts:
       - build-results/bundle/*.aab
       - build-results/*.apk
