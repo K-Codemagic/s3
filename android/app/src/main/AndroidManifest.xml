@@ -1,5 +1,5 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.s3">
+    package="com.kalgi0305.s3">
    <application
         android:label="s3"
         android:name="${applicationName}"
